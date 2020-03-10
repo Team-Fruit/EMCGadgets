@@ -38,8 +38,9 @@ repositories {
     }
 }
 
-dependencies { 
+dependencies {
     deobfCompile "projecte:ProjectE:1.12.2:PE1.4.1"
+    deobfCompile "building-gadgets:BuildingGadgets:2.8.1"
 }
 
 processResources {

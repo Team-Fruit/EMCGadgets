@@ -11,20 +11,17 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(
-        modid = EMCGadgets.MOD_ID,
-        name = EMCGadgets.MOD_NAME,
-        version = EMCGadgets.VERSION
+        modid = Reference.MOD_ID,
+        name = Reference.MOD_NAME,
+        version = Reference.VERSION
 )
 public class EMCGadgets {
 
-    public static final String MOD_ID = "emcgadgets";
-    public static final String MOD_NAME = "EMCGadgets";
-    public static final String VERSION = "2019.1-1.2.23";
 
     /**
      * This is the instance of your mod as created by Forge. It will never be null.
      */
-    @Mod.Instance(MOD_ID)
+    @Mod.Instance(Reference.MOD_ID)
     public static EMCGadgets INSTANCE;
 
     /**
@@ -56,7 +53,7 @@ public class EMCGadgets {
      * Forge will automatically look up and bind blocks to the fields in this class
      * based on their registry name.
      */
-    @GameRegistry.ObjectHolder(MOD_ID)
+    @GameRegistry.ObjectHolder(Reference.MOD_ID)
     public static class Blocks {
       /*
           public static final MySpecialBlock mySpecialBlock = null; // placeholder for special block below
@@ -67,7 +64,7 @@ public class EMCGadgets {
      * Forge will automatically look up and bind items to the fields in this class
      * based on their registry name.
      */
-    @GameRegistry.ObjectHolder(MOD_ID)
+    @GameRegistry.ObjectHolder(Reference.MOD_ID)
     public static class Items {
       /*
           public static final ItemBlock mySpecialBlock = null; // itemblock for the block above
@@ -110,4 +107,5 @@ public class EMCGadgets {
 
     }
     */
+
 }
