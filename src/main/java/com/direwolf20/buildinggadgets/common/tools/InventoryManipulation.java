@@ -20,14 +20,17 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
-import net.teamfruit.emcgadgets.Log;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
-//import com.direwolf20.buildinggadgets.common.tools.InventoryManipulation;
-
+/*edit*/
+import moze_intel.projecte.api.capabilities.IKnowledgeProvider;
+import moze_intel.projecte.gameObjs.items.TransmutationTablet;
+import moze_intel.projecte.utils.EMCHelper;
+import com.latmod.mods.projectex.integration.PersonalEMC;
 import static net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
+/*edit*/
 
 public class InventoryManipulation {
     private enum InventoryType {
@@ -122,14 +125,35 @@ public class InventoryManipulation {
     public static boolean useItem(ItemStack target, EntityPlayer player, int amountRequired, World world) {
         if (player.capabilities.isCreativeMode)
             return true;
-        Log.log.info("UseItem");
+
         int amountLeft = amountRequired;
+
         for (Pair<InventoryType, IItemHandler> inv : collectInventories(GadgetGeneric.getGadget(player), player, world, NetworkIO.Operation.EXTRACT)) {
             amountLeft -= extractFromInventory(inv.getValue(), target, amountLeft);
 
-            if( amountLeft <= 0 )
+            if (amountLeft <= 0)
                 return true;
         }
+
+        /*edit*/
+        for (ItemStack s : player.inventory.mainInventory) {
+            if (s.getItem() instanceof TransmutationTablet) {
+
+                IKnowledgeProvider provider = PersonalEMC.get(player);
+
+                if (provider.hasKnowledge(target)) {
+                    long emc = provider.getEmc();
+                    long useEmc = amountLeft * EMCHelper.getEmcValue(target);
+                    if (emc != 0) {
+                        if (emc >= useEmc) {
+                            provider.setEmc(emc - useEmc);
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        /*edit*/
 
         return amountLeft < amountRequired;
     }
@@ -210,8 +234,27 @@ public class InventoryManipulation {
     public static int countItem(ItemStack itemStack, EntityPlayer player, IRemoteInventoryProvider remoteInventory) {
         if (player.capabilities.isCreativeMode)
             return Integer.MAX_VALUE;
-        Log.log.info("CountItem");
+
         long count = remoteInventory.countItem(GadgetGeneric.getGadget(player), itemStack);
+
+        /*edit*/
+        for (ItemStack s : player.inventory.mainInventory) {
+            if (s.getItem() instanceof TransmutationTablet) {
+
+                IKnowledgeProvider provider = PersonalEMC.get(player);
+
+                if (provider.hasKnowledge(itemStack)) {
+                    long emc = provider.getEmc();
+                    long useEmc = count * EMCHelper.getEmcValue(itemStack);
+                    if (emc != 0) {
+                        if (emc >= useEmc) {
+                            return Integer.MAX_VALUE;
+                        }
+                    }
+                }
+            }
+        }
+        /*edit*/
 
         IItemHandler currentInv = player.getCapability(ITEM_HANDLER_CAPABILITY, null);
         if( currentInv == null )
@@ -233,6 +276,7 @@ public class InventoryManipulation {
             ItemStack stackInSlot = currentInv.getStackInSlot(slot);
             count += stackInSlot.getCount();
         }
+
         return MathTool.longToInt(count);
     }
 
@@ -248,7 +292,6 @@ public class InventoryManipulation {
         if (player.capabilities.isCreativeMode) {
             return Integer.MAX_VALUE;
         }
-        Log.log.info("CountPaste");
         IItemHandler currentInv = player.getCapability(ITEM_HANDLER_CAPABILITY, null);
         if( currentInv == null )
             return 0;
@@ -323,7 +366,6 @@ public class InventoryManipulation {
         if (player.capabilities.isCreativeMode) {
             return true;
         }
-        Log.log.info("UsePaste");
 
         IItemHandler currentInv = player.getCapability(ITEM_HANDLER_CAPABILITY, null);
         if( currentInv == null )
