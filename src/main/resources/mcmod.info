@@ -1,0 +1,22 @@
+[
+  {
+    "modid": "emcgadgets",
+    "name": "EMCGadgets",
+    "description": "injection point type '%s'",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://www.teamfruit.net/",
+    "updateUrl": "https://github.com/Team-Fruit/EMCGadgets/releases",
+    "authorList": [
+      "yuu_111",
+      "Kamesuta"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": [
+      "buildinggadgets",
+      "projecte"
+    ]
+  }
+]
