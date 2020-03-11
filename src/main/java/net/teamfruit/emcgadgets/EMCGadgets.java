@@ -8,7 +8,12 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.network.NetworkCheckHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+
+
+import java.util.Map;
 
 @Mod(
         modid = Reference.MOD_ID,
@@ -107,5 +112,10 @@ public class EMCGadgets {
 
     }
     */
+    @NetworkCheckHandler
+    public boolean netCheckHandler(Map<String, String> mods, Side side)
+    {
+        return true;
+    }
 
 }
