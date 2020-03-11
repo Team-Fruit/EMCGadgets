@@ -18,7 +18,9 @@ import java.util.Map;
 @Mod(
         modid = Reference.MOD_ID,
         name = Reference.MOD_NAME,
-        version = Reference.VERSION
+        version = Reference.VERSION,
+        dependencies = Reference.DEPENDENCIES,
+        acceptableRemoteVersions = "*"
 )
 public class EMCGadgets {
 
@@ -53,10 +55,9 @@ public class EMCGadgets {
     public void postinit(FMLPostInitializationEvent event) {
 
     }
-    
+
     @NetworkCheckHandler
-    public boolean netCheckHandler(Map<String, String> mods, Side side)
-    {
+    public boolean netCheckHandler(Map<String, String> mods, Side side) {
         return true;
     }
 

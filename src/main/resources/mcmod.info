@@ -1,7 +1,7 @@
 [
   {
     "modid": "emcgadgets",
-    "name": "EMCGadgets",
+    "name": "EMC Gadgets",
     "description": "injection point type '%s'",
     "version": "${version}",
     "mcversion": "${mcversion}",
@@ -16,7 +16,8 @@
     "screenshots": [],
     "dependencies": [
       "buildinggadgets",
-      "projecte"
+      "projecte",
+      "projectex"
     ]
   }
 ]
