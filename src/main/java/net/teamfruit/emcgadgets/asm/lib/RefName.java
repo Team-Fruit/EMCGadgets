@@ -6,36 +6,44 @@ import org.apache.commons.lang3.Validate;
 import javax.annotation.Nonnull;
 
 public class RefName {
-	private final @Nonnull String mcpName;
-	private final @Nonnull String srgName;
+	@Nonnull
+	private final String mcpName;
+	@Nonnull
+	private final String srgName;
 
 	protected RefName(final @Nonnull String mcpName, final @Nonnull String srgName) {
 		this.mcpName = mcpName;
 		this.srgName = srgName;
 	}
 
-	public @Nonnull String name() {
+	@Nonnull
+	public String name() {
 		return CompatFMLDeobfuscatingRemapper.useMcpNames() ? Validate.notEmpty(this.mcpName) : Validate.notEmpty(this.srgName);
 	}
 
-	public @Nonnull String mcpName() {
+	@Nonnull
+	public String mcpName() {
 		return this.mcpName;
 	}
 
-	public @Nonnull String srgName() {
+	@Nonnull
+	public String srgName() {
 		return this.srgName;
 	}
 
 	@Override
-	public @Nonnull String toString() {
+	@Nonnull
+	public String toString() {
 		return String.format("[%s,%s]", this.mcpName, this.srgName);
 	}
 
-	public static @Nonnull RefName deobName(final @Nonnull String mcpName, final @Nonnull String srgName) {
+	@Nonnull
+	public static RefName deobName(final @Nonnull String mcpName, final @Nonnull String srgName) {
 		return new RefName(mcpName, srgName);
 	}
 
-	public static @Nonnull RefName name(final @Nonnull String name) {
+	@Nonnull
+	public static RefName name(final @Nonnull String name) {
 		return new RefName(name, name);
 	}
 }

@@ -9,9 +9,13 @@ import javax.annotation.Nonnull;
 import java.util.function.Predicate;
 
 public class FieldMatcher implements Predicate<FieldNode> {
-	private final @Nonnull ClassName clsName;
-	private final @Nonnull String description;
-	private final @Nonnull RefName refname;;
+	private final @Nonnull
+	ClassName clsName;
+	private final @Nonnull
+	String description;
+	private final @Nonnull
+	RefName refname;
+	;
 
 	public FieldMatcher(final @Nonnull ClassName clsName, final @Nonnull String description, final @Nonnull RefName refname) {
 		this.clsName = clsName;
@@ -21,7 +25,7 @@ public class FieldMatcher implements Predicate<FieldNode> {
 
 	public boolean match(final @Nonnull String fieldName, final @Nonnull String fieldDesc) {
 		if (CompatFMLDeobfuscatingRemapper.useMcpNames())
-			return fieldName.equals(this.refname.mcpName())&&fieldDesc.equals(this.description);
+			return fieldName.equals(this.refname.mcpName()) && fieldDesc.equals(this.description);
 		final String srgDesc = CompatFMLDeobfuscatingRemapper.mapDesc(fieldDesc);
 		if (!srgDesc.equals(this.description))
 			return false;
@@ -35,11 +39,12 @@ public class FieldMatcher implements Predicate<FieldNode> {
 	}
 
 	public Predicate<AbstractInsnNode> insnMatcher() {
-		return node -> node instanceof FieldInsnNode&&match(((FieldInsnNode) node).name, ((FieldInsnNode) node).desc);
+		return node -> node instanceof FieldInsnNode && match(((FieldInsnNode) node).name, ((FieldInsnNode) node).desc);
 	}
 
 	@Override
-	public @Nonnull String toString() {
+	public @Nonnull
+	String toString() {
 		return String.format("Field Matcher: %s.%s %s", this.clsName.getBytecodeName(), this.refname, this.description);
 	}
 }

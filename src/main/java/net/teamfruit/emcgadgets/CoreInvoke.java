@@ -8,10 +8,11 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 /**
  * a method invoked by ASM
+ *
  * @author Kamesuta
  */
 @Retention(SOURCE)
-@Target({ TYPE, CONSTRUCTOR, METHOD, FIELD })
+@Target({TYPE, CONSTRUCTOR, METHOD, FIELD})
 public @interface CoreInvoke {
 
 }

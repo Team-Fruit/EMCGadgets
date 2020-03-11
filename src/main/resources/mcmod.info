@@ -2,7 +2,7 @@
   {
     "modid": "emcgadgets",
     "name": "EMC Gadgets",
-    "description": "injection point type '%s'",
+    "description": "You can use EMC for building!",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "url": "https://www.teamfruit.net/",
@@ -11,7 +11,7 @@
       "yuu_111",
       "Kamesuta"
     ],
-    "credits": "",
+    "credits": "2020 TeamFruit",
     "logoFile": "",
     "screenshots": [],
     "dependencies": [

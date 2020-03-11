@@ -32,7 +32,7 @@ public class VisitorHelper {
 		final ClassWriter cw = new ClassWriter(writerFlags) {
 			@Override
 			protected String getCommonSuperClass(final @Nullable String type1, final @Nullable String type2) {
-				if (type1==null||type2==null)
+				if (type1 == null || type2 == null)
 					throw new NullPointerException();
 				Class<?> c, d;
 				final ClassLoader classLoader = ClassWriter.class.getClassLoader();
@@ -56,7 +56,7 @@ public class VisitorHelper {
 					return type1;
 				if (d.isAssignableFrom(c))
 					return type2;
-				if (c.isInterface()||d.isInterface())
+				if (c.isInterface() || d.isInterface())
 					return ClassName.of("java.lang.Object").getBytecodeName();
 				else {
 					do

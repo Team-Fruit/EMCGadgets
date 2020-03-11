@@ -9,9 +9,12 @@ import javax.annotation.Nonnull;
 import java.util.function.Predicate;
 
 public class MethodMatcher implements Predicate<MethodNode> {
-	private final @Nonnull ClassName clsName;
-	private final @Nonnull String description;
-	private final @Nonnull RefName refname;;
+	@Nonnull
+	private final ClassName clsName;
+	@Nonnull
+	private final String description;
+	@Nonnull
+	private final RefName refname;
 
 	public MethodMatcher(final @Nonnull ClassName clsName, final @Nonnull String description, final @Nonnull RefName refname) {
 		this.clsName = clsName;
@@ -21,7 +24,7 @@ public class MethodMatcher implements Predicate<MethodNode> {
 
 	public boolean match(final @Nonnull String methodName, final @Nonnull String methodDesc) {
 		if (CompatFMLDeobfuscatingRemapper.useMcpNames())
-			return methodName.equals(this.refname.mcpName())&&methodDesc.equals(this.description);
+			return methodName.equals(this.refname.mcpName()) && methodDesc.equals(this.description);
 		final String srgMethodDesc = CompatFMLDeobfuscatingRemapper.mapMethodDesc(methodDesc);
 		if (!srgMethodDesc.equals(this.description))
 			return false;
@@ -35,11 +38,12 @@ public class MethodMatcher implements Predicate<MethodNode> {
 	}
 
 	public Predicate<AbstractInsnNode> insnMatcher() {
-		return node -> node instanceof MethodInsnNode&&match(((MethodInsnNode) node).name, ((MethodInsnNode) node).desc);
+		return node -> node instanceof MethodInsnNode && match(((MethodInsnNode) node).name, ((MethodInsnNode) node).desc);
 	}
 
 	@Override
-	public @Nonnull String toString() {
+	@Nonnull
+	public String toString() {
 		return String.format("Mathod Matcher: %s.%s %s", this.clsName.getBytecodeName(), this.refname, this.description);
 	}
 }

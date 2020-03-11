@@ -8,19 +8,22 @@ import java.util.Map;
 
 public class EMCGadgetsCorePlugin implements IFMLLoadingPlugin {
 	@Override
-	public @Nullable String[] getASMTransformerClass() {
-		return new String[] {
+	public @Nullable
+	String[] getASMTransformerClass() {
+		return new String[]{
 				Reference.TRANSFORMER
 		};
 	}
 
 	@Override
-	public @Nullable String getModContainerClass() {
+	public @Nullable
+	String getModContainerClass() {
 		return null;
 	}
 
 	@Override
-	public @Nullable String getSetupClass() {
+	public @Nullable
+	String getSetupClass() {
 		return null;
 	}
 
@@ -29,7 +32,8 @@ public class EMCGadgetsCorePlugin implements IFMLLoadingPlugin {
 	}
 
 	@Override
-	public @Nullable String getAccessTransformerClass() {
+	public @Nullable
+	String getAccessTransformerClass() {
 		return null;
 	}
 }

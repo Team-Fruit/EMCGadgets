@@ -24,7 +24,7 @@ public abstract class CompatTransformer implements IClassTransformer {
 
 	@Override
 	public byte[] transform(final String name, final String transformedName, byte[] bytes) {
-		if (bytes==null||name==null||transformedName==null)
+		if (bytes == null || name == null || transformedName == null)
 			return bytes;
 
 		if (targetNames().contains(transformedName))

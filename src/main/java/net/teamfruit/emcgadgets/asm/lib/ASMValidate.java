@@ -55,7 +55,7 @@ public class ASMValidate {
 
 		public ASMValidateImpl(final String testName) {
 			this.testName = testName;
-			Log.log.info("ASM Validator Start: "+testName);
+			Log.log.info("ASM Validator Start: " + testName);
 		}
 
 		@Override
@@ -93,12 +93,12 @@ public class ASMValidate {
 		// It often happens due to mistakes in arguments or Mcp or Srg names, so it should be displayed collectively.
 		@Override
 		public void validate() {
-			if (this.cases.size()>0)
+			if (this.cases.size() > 0)
 				throw new IllegalStateException(String.format("ASM Assertion Error in %s: Not enough checkpoints: %s", this.testName,
 						this.cases.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting())).entrySet()
-								.stream().map(e -> (e.getValue()==1 ? e.getKey() : String.format("%s(%d)", e.getKey(), e.getValue())))
+								.stream().map(e -> (e.getValue() == 1 ? e.getKey() : String.format("%s(%d)", e.getKey(), e.getValue())))
 								.collect(Collectors.joining(", "))));
-			Log.log.info("ASM Validator Passed: "+this.testName);
+			Log.log.info("ASM Validator Passed: " + this.testName);
 		}
 	}
 }
