@@ -101,7 +101,7 @@ ext {
                     }
                 }
 
-                subprojects {
+                allprojects {
                     afterEvaluate {
                         tasks.build.dependsOn increment
                     }
@@ -403,10 +403,7 @@ if (sec_github_key!=null&&project.isProperty('extra_github_owner')&&project.isPr
         name = mod_changelog_title
         body = mod_changelog
         draft = false
-        def allassets = [jar]
-        subprojects.each { p ->
-            allassets.addAll([p.tasks.jar, p.tasks.devJar, p.tasks.sourceJar, p.tasks.apiJar])
-        }
+        def allassets = [jar, devJar, sourceJar]
         assets = allassets*.outputs*.files*.asPath*.tr('\\','/')
     }
 } else
@@ -454,10 +451,6 @@ if (sec_bintray_user!=null&&sec_bintray_key!=null&&project.isProperty('extra_bin
         user = sec_bintray_user
         key = sec_bintray_key
         def pubs = ['ModPublication']
-        subprojects.each { p ->
-            if (p.name!=mod_commonname)
-                pubs += "ModPublication-${p.version_minecraft}"
-        }
         publications = pubs
 
         publish = true
@@ -502,10 +495,10 @@ if (sec_curseforge_key!=null&&project.isProperty('extra_curseforge_id')) {
 
             addGameVersion 'Forge'
 
-            if (project.isProperty('extra_curseforge_dependency')) {
-                relations {
-                    requiredLibrary project.extra_curseforge_dependency
-                }
+            relations {
+                requiredLibrary 'building-gadgets'
+                requiredLibrary 'projecte'
+                requiredLibrary 'project-ex'
             }
         }
     }
