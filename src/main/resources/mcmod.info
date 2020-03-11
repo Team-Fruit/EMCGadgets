@@ -12,7 +12,7 @@
       "Kamesuta"
     ],
     "credits": "2020 TeamFruit",
-    "logoFile": "",
+    "logoFile": "logo.png",
     "screenshots": [],
     "dependencies": [
       "buildinggadgets",
