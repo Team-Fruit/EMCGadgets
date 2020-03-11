@@ -1,6 +1,5 @@
 package net.teamfruit.emcgadgets;
 
-import com.direwolf20.buildinggadgets.common.tools.InventoryManipulation;
 import com.direwolf20.buildinggadgets.common.tools.MathTool;
 import com.latmod.mods.projectex.integration.PersonalEMC;
 import moze_intel.projecte.api.capabilities.IKnowledgeProvider;
@@ -8,11 +7,11 @@ import moze_intel.projecte.gameObjs.items.TransmutationTablet;
 import moze_intel.projecte.utils.EMCHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public class EMCInventoryManipulation {
 
-    public static int extractFromEmc(EntityPlayer player, ItemStack target, int amountRequired) {
+    @CoreInvoke
+    public static int useEmc(ItemStack target, EntityPlayer player, int amountRequired) {
         boolean hasTable = player.inventory.mainInventory.stream()
                 .anyMatch(s -> s.getItem() instanceof TransmutationTablet);
         if (hasTable) {
@@ -31,7 +30,8 @@ public class EMCInventoryManipulation {
         return 0;
     }
 
-    public static int countInEmc(ItemStack itemStack, EntityPlayer player) {
+    @CoreInvoke
+    public static long countEmc(ItemStack itemStack, EntityPlayer player) {
         boolean hasTable = player.inventory.mainInventory.stream()
                 .anyMatch(s -> s.getItem() instanceof TransmutationTablet);
         if (hasTable) {
@@ -41,9 +41,10 @@ public class EMCInventoryManipulation {
                 long itemEmc = EMCHelper.getEmcValue(itemStack);
                 long placeableCount = provider.getEmc() / itemEmc;
                 if (placeableCount > 0)
-                    return MathTool.longToInt(placeableCount);
+                    return placeableCount;
             }
         }
-        return 0;
+        return 0L;
     }
+
 }

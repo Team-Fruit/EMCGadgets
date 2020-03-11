@@ -25,14 +25,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
-/*edit*/
-import moze_intel.projecte.api.capabilities.IKnowledgeProvider;
-import moze_intel.projecte.gameObjs.items.TransmutationTablet;
-import moze_intel.projecte.utils.EMCHelper;
-import com.latmod.mods.projectex.integration.PersonalEMC;
-
 import static net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
-/*edit*/
 
 public class InventoryManipulation {
     private enum InventoryType {
@@ -137,7 +130,7 @@ public class InventoryManipulation {
         }
 
         /*edit*/
-        amountLeft -= EMCInventoryManipulation.extractFromEmc(player, target, amountLeft);
+        amountLeft -= EMCInventoryManipulation.useEmc(target, player, amountLeft);
         /*edit*/
 
         return amountLeft < amountRequired;
@@ -223,7 +216,7 @@ public class InventoryManipulation {
         long count = remoteInventory.countItem(GadgetGeneric.getGadget(player), itemStack);
 
         /*edit*/
-        count += EMCInventoryManipulation.countInEmc(itemStack, player);
+        count += EMCInventoryManipulation.countEmc(itemStack, player);
         /*edit*/
 
         IItemHandler currentInv = player.getCapability(ITEM_HANDLER_CAPABILITY, null);
