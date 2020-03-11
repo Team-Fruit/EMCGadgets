@@ -2,11 +2,11 @@
   {
     "modid": "emcgadgets",
     "name": "EMC Gadgets",
-    "description": "You can use EMC for building!",
+    "description": "You can use EMC with building gadgets!",
     "version": "${version}",
     "mcversion": "${mcversion}",
-    "url": "https://www.teamfruit.net/",
-    "updateUrl": "https://github.com/Team-Fruit/EMCGadgets/releases",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/emcgadgets/",
+    "updateUrl": "https://www.curseforge.com/minecraft/mc-mods/emcgadgets/files",
     "authorList": [
       "yuu_111",
       "Kamesuta"
