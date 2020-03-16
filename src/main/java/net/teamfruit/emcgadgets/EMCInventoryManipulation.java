@@ -2,18 +2,16 @@ package net.teamfruit.emcgadgets;
 
 import com.latmod.mods.projectex.integration.PersonalEMC;
 import moze_intel.projecte.api.capabilities.IKnowledgeProvider;
-import moze_intel.projecte.gameObjs.items.TransmutationTablet;
 import moze_intel.projecte.utils.EMCHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 
 public class EMCInventoryManipulation {
 
 	@CoreInvoke
 	public static int useEmc(ItemStack target, EntityPlayer player, int amountRequired) {
-		boolean hasTable = player.inventory.mainInventory.stream()
-				.anyMatch(s -> s.getItem() instanceof TransmutationTablet);
-		if (hasTable) {
+		if (hasTablet(player.inventory.mainInventory)) {
 			IKnowledgeProvider provider = PersonalEMC.get(player);
 
 			if (provider.hasKnowledge(target)) {
@@ -31,9 +29,7 @@ public class EMCInventoryManipulation {
 
 	@CoreInvoke
 	public static long countEmc(ItemStack itemStack, EntityPlayer player) {
-		boolean hasTable = player.inventory.mainInventory.stream()
-				.anyMatch(s -> s.getItem() instanceof TransmutationTablet);
-		if (hasTable) {
+		if (hasTablet(player.inventory.mainInventory)) {
 			IKnowledgeProvider provider = PersonalEMC.get(player);
 
 			if (provider.hasKnowledge(itemStack)) {
@@ -46,7 +42,12 @@ public class EMCInventoryManipulation {
 		return 0L;
 	}
 
-	public static int longToInt(long count) {
+	private static boolean hasTablet(NonNullList<ItemStack> inventory) {
+		return inventory.stream()
+				.anyMatch(s -> ModConfig.keyItems.contains(s.getItem()));
+	}
+
+	private static int longToInt(long count) {
 		try {
 			return Math.toIntExact(count);
 		} catch (ArithmeticException var3) {

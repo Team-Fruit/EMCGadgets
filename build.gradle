@@ -92,7 +92,7 @@ ext {
                 task increment {
                     doLast {
                         def props = new Properties()
-                        props.version = mod_version_min
+                        props.version = mod_version_min.toString()
                         props.buildnumber = version_build+1 as String
                         buildnumberfile.parentFile.mkdirs()
                         buildnumberfile.withOutputStream { stream ->
