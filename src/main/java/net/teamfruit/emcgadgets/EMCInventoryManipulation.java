@@ -34,6 +34,7 @@ public class EMCInventoryManipulation {
 
 			if (provider.hasKnowledge(itemStack)) {
 				long itemEmc = EMCHelper.getEmcValue(itemStack);
+				if (itemEmc <= 0L) return 0L;
 				long placeableCount = provider.getEmc() / itemEmc;
 				if (placeableCount > 0)
 					return placeableCount;

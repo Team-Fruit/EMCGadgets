@@ -7,21 +7,11 @@
           <platformType>FORGE</platformType>
           <platformType>MCP</platformType>
         </autoDetectTypes>
+        <projectReimportVersion>1</projectReimportVersion>
       </configuration>
     </facet>
   </component>
   <component name="McpModuleSettings">
-    <option name="mappingFiles">
-      <set>
-        <option value="C:\Users\yuu21\.gradle\caches\minecraft\de\oceanlabs\mcp\mcp_stable\39\1.12.2\srgs\srg.exc" />
-        <option value="C:\Users\yuu21\.gradle\caches\minecraft\de\oceanlabs\mcp\mcp_stable\39\1.12.2\srgs\mcp-notch.srg" />
-        <option value="C:\Users\yuu21\.gradle\caches\minecraft\de\oceanlabs\mcp\mcp_stable\39\1.12.2\srgs\mcp-srg.srg" />
-        <option value="C:\Users\yuu21\.gradle\caches\minecraft\de\oceanlabs\mcp\mcp_stable\39\1.12.2\srgs\notch-srg.srg" />
-        <option value="C:\Users\yuu21\.gradle\caches\minecraft\de\oceanlabs\mcp\mcp_stable\39\1.12.2\srgs\notch-mcp.srg" />
-        <option value="C:\Users\yuu21\.gradle\caches\minecraft\de\oceanlabs\mcp\mcp_stable\39\1.12.2\srgs\mcp.exc" />
-      </set>
-    </option>
-    <option name="mcpVersion" value="stable_39" />
-    <option name="minecraftVersion" value="1.12.2" />
+    <option name="srgType" value="SRG" />
   </component>
 </module>
