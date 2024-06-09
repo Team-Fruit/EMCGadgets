@@ -312,9 +312,14 @@ repositories {
 }
 
 dependencies {
-    deobfCompile "projecte:ProjectE:1.12.2:PE1.4.1"
-    deobfCompile "building-gadgets:BuildingGadgets:2.8.1"
-    deobfCompile "project-ex:ProjectEX:1.2.0.39"
+    // 何故かCurseForgeのMavenAPIから取得できないのでjarファイルを参照する
+    // deobfCompile "projecte:ProjectE:1.12.2:PE1.4.1"
+    // deobfCompile "building-gadgets:BuildingGadgets:2.8.1"
+    // deobfCompile "project-ex:ProjectEX:1.2.0.39"
+
+    implementation(fileTree(dir: 'libs', include: ['ProjectE-1.12.2-PE1.4.1.jar']))
+    implementation(fileTree(dir: 'libs', include: ['ProjectEX-1.2.0.40.jar']))
+    implementation(fileTree(dir: 'libs', include: ['BuildingGadgets-2.8.4.jar']))
 
     if (project.forgegradle.contains('3.+')) {
         minecraft "net.minecraftforge:forge:${project.version_minecraft}-${project.version_forge}"

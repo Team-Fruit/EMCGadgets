@@ -113,3 +113,8 @@ gradle-app.setting
 **/build/
 
 # End of https://www.gitignore.io/api/gradle,intellij,forgegradle
+
+# Library JarFile
+BuildingGadgets-2.8.4.jar
+ProjectE-1.12.2-PE1.4.1.jar
+ProjectEX-1.2.0.40.jar
