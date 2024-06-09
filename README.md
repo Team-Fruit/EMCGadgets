@@ -3,7 +3,7 @@
 [![Actions Status](https://github.com/Team-Fruit/EMCGadgets/workflows/Build%20Mod/badge.svg)](https://github.com/Team-Fruit/EMCGadgets/actions)
 
 # EMC Gadgets
-![Minecraft 1.12.2](https://img.shields.io/badge/Minecraft-1.11.2-green.svg?style=flat)
+![Minecraft 1.12.2](https://img.shields.io/badge/Minecraft-1.12.2-green.svg?style=flat)
 [![CurseForge](http://cf.way2muchnoise.eu/emcgadgets.svg)](https://minecraft.curseforge.com/projects/emcgadgets)
 
 ## Table of Contents
