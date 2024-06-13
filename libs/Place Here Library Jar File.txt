@@ -1,0 +1,3 @@
+BuildingGadgets-2.8.4.jar → https://www.curseforge.com/minecraft/mc-mods/building-gadgets/files/3005950
+ProjectE-1.12.2-PE1.4.1.jar → https://www.curseforge.com/minecraft/mc-mods/projecte/files/2702991
+ProjectEX-1.2.0.40.jar → https://www.curseforge.com/minecraft/mc-mods/projectex/files/3014173
