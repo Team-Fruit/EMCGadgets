@@ -3,7 +3,7 @@
 [![Actions Status](https://github.com/Team-Fruit/EMCGadgets/workflows/Build%20Mod/badge.svg)](https://github.com/Team-Fruit/EMCGadgets/actions)
 
 # EMC Gadgets
-![Minecraft 1.12.2](https://img.shields.io/badge/Minecraft-1.12.2-green.svg?style=flat)
+![Minecraft 1.12.2](https://img.shields.io/badge/Minecraft-1.16.5-green.svg?style=flat)
 [![CurseForge](http://cf.way2muchnoise.eu/emcgadgets.svg)](https://minecraft.curseforge.com/projects/emcgadgets)
 
 ## Table of Contents
@@ -26,7 +26,7 @@ You can use EMC with building gadgets!
 ## License
 
 * EMC Gadgets
-  - (c) 2019 TeamFruit
+  - (c) 2019-2024 TeamFruit
   - [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://opensource.org/licenses/mit-license.php)
 
 ## Downloads
