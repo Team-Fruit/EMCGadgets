@@ -1,0 +1,49 @@
+package net.teamfruit.emcgadgets.asm.lib;
+
+import net.teamfruit.emcgadgets.compat.CompatFMLDeobfuscatingRemapper;
+import org.objectweb.asm.tree.AbstractInsnNode;
+import org.objectweb.asm.tree.MethodInsnNode;
+import org.objectweb.asm.tree.MethodNode;
+
+import javax.annotation.Nonnull;
+import java.util.function.Predicate;
+
+public class MethodMatcher implements Predicate<MethodNode> {
+	@Nonnull
+	private final ClassName clsName;
+	@Nonnull
+	private final String description;
+	@Nonnull
+	private final RefName refname;
+
+	public MethodMatcher(final @Nonnull ClassName clsName, final @Nonnull String description, final @Nonnull RefName refname) {
+		this.clsName = clsName;
+		this.description = description;
+		this.refname = refname;
+	}
+
+	public boolean match(final @Nonnull String methodName, final @Nonnull String methodDesc) {
+		if (CompatFMLDeobfuscatingRemapper.useMcpNames())
+			return methodName.equals(this.refname.mcpName()) && methodDesc.equals(this.description);
+		final String srgMethodDesc = CompatFMLDeobfuscatingRemapper.mapMethodDesc(methodDesc);
+		if (!srgMethodDesc.equals(this.description))
+			return false;
+		final String srgMethodName = CompatFMLDeobfuscatingRemapper.mapMethodName(CompatFMLDeobfuscatingRemapper.unmap(this.clsName.getBytecodeName()), methodName, methodDesc);
+		return srgMethodName.equals(this.refname.srgName());
+	}
+
+	@Override
+	public boolean test(final MethodNode node) {
+		return match(node.name, node.desc);
+	}
+
+	public Predicate<AbstractInsnNode> insnMatcher() {
+		return node -> node instanceof MethodInsnNode && match(((MethodInsnNode) node).name, ((MethodInsnNode) node).desc);
+	}
+
+	@Override
+	@Nonnull
+	public String toString() {
+		return String.format("Mathod Matcher: %s.%s %s", this.clsName.getBytecodeName(), this.refname, this.description);
+	}
+}
