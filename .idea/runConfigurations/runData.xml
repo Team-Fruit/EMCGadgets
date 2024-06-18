@@ -2,12 +2,12 @@
 <component>
   <configuration default="false" factoryName="Application" name="runData" singleton="false" type="Application">
     <option name="MAIN_CLASS_NAME" value="net.minecraftforge.userdev.LaunchTesting"/>
-    <option name="VM_PARAMETERS" value="-Dforge.logging.console.level=debug -Dforge.logging.markers=REGISTRIES -XX:+IgnoreUnrecognizedVMOptions --add-exports=java.base/sun.security.util=ALL-UNNAMED --add-exports=jdk.naming.dns/com.sun.jndi.dns=java.naming --add-opens=java.base/java.util.jar=ALL-UNNAMED"/>
-    <option name="PROGRAM_PARAMETERS" value="--mod examplemod --all --output D:\Dev\EMCGadgets\src\generated\resources --existing D:\Dev\EMCGadgets\src\main\resources"/>
+    <option name="VM_PARAMETERS" value="-Dforge.logging.console.level=debug -Dforge.logging.markers=REGISTRIES -Dnet.minecraftforge.gradle.GradleStart.srg.srg-mcp=D:\Dev\EMCGadgets\build\createSrgToMcp\output.srg -Dmixin.env.remapRefMap=true -Dmixin.env.refMapRemappingFile=D:\Dev\EMCGadgets\build\createSrgToMcp\output.srg -XX:+IgnoreUnrecognizedVMOptions --add-exports=java.base/sun.security.util=ALL-UNNAMED --add-exports=jdk.naming.dns/com.sun.jndi.dns=java.naming --add-opens=java.base/java.util.jar=ALL-UNNAMED"/>
+    <option name="PROGRAM_PARAMETERS" value="--mod emcgadgets --all --output D:\Dev\EMCGadgets\src\generated\resources --existing D:\Dev\EMCGadgets\src\main\resources --mixin.config emcgadgets.mixins.json"/>
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$\run-data"/>
     <module name="EMCGadgets.main"/>
     <envs>
-      <env name="MOD_CLASSES" value="examplemod%%$PROJECT_DIR$\build\resources\main;examplemod%%$PROJECT_DIR$\build\classes\java\main"/>
+      <env name="MOD_CLASSES" value="emcgadgets%%$PROJECT_DIR$\build\resources\main;emcgadgets%%$PROJECT_DIR$\build\classes\java\main"/>
       <env name="MCP_MAPPINGS" value="official_1.16.5"/>
       <env name="MCP_VERSION" value="20210115.111550"/>
       <env name="FORGE_VERSION" value="36.2.42"/>
