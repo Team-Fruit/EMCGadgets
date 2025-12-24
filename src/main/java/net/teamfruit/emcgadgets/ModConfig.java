@@ -1,48 +1,54 @@
 package net.teamfruit.emcgadgets;
 
-import com.google.common.base.Predicates;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.config.Config;
-import net.minecraftforge.common.config.ConfigManager;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.config.ModConfig.Type;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-@Config(modid = Reference.MOD_ID, name = Reference.MOD_NAME)
 public class ModConfig {
 
-    @Config.Name("Key Item")
-    @Config.Comment({ "This item is required when using EMC Gadget" })
-    public static String[] keyItemNames = {
-            "projecte:item.pe_transmutation_tablet",
-            "projectex:arcane_tablet",
-    };
+	private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
+	public static final ForgeConfigSpec SPEC;
 
-    @Config.Ignore
-    public static Set<Item> keyItems;
+	private static final ForgeConfigSpec.ConfigValue<List<? extends String>> KEY_ITEM_NAMES;
 
-    public static void loadKeyItems() {
-        keyItems = Arrays.stream(keyItemNames)
-                .map(e -> ForgeRegistries.ITEMS.getValue(new ResourceLocation(e)))
-                .filter(Predicates.notNull())
-                .collect(Collectors.toSet());
-    }
+	public static Set<Item> keyItems = new HashSet<>();
 
-    @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
-    public static class Handler {
+	static {
+		BUILDER.comment("EMCGadgets Configuration");
 
-        @SubscribeEvent
-        public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event) {
-            if (event.getModID().equals(Reference.MOD_ID)) {
-                ConfigManager.load(Reference.MOD_ID, Config.Type.INSTANCE);
-                loadKeyItems();
-            }
-        }
-    }
+		KEY_ITEM_NAMES = BUILDER
+				.comment("Items required to use EMC with Building Gadgets",
+						"The player must have one of these items in their inventory")
+				.defineList("keyItems",
+						Arrays.asList("projecte:transmutation_tablet"),
+						obj -> obj instanceof String);
+
+		SPEC = BUILDER.build();
+	}
+
+	public static void register() {
+		ModLoadingContext.get().registerConfig(Type.COMMON, SPEC);
+	}
+
+	public static void loadKeyItems() {
+		keyItems.clear();
+		for (String name : KEY_ITEM_NAMES.get()) {
+			ResourceLocation loc = ResourceLocation.tryParse(name);
+			if (loc != null) {
+				Item item = ForgeRegistries.ITEMS.getValue(loc);
+				if (item != null) {
+					keyItems.add(item);
+				}
+			}
+		}
+		EMCGadgets.LOGGER.info("Loaded {} key items: {}", keyItems.size(), keyItems);
+	}
 }

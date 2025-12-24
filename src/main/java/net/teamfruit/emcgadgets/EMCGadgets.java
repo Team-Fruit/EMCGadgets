@@ -1,33 +1,26 @@
 package net.teamfruit.emcgadgets;
 
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkCheckHandler;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.Map;
-
-@Mod(
-		modid = Reference.MOD_ID,
-		name = Reference.MOD_NAME,
-		version = Reference.VERSION,
-		dependencies = Reference.DEPENDENCIES,
-		acceptableRemoteVersions = "*",
-		guiFactory = "net.teamfruit.emcgadgets.gui.config.ConfigGuiFactory"
-)
+@Mod(EMCGadgets.MOD_ID)
 public class EMCGadgets {
 
-	@Mod.Instance(Reference.MOD_ID)
-	public static EMCGadgets INSTANCE;
+    public static final String MOD_ID = "emcgadgets";
+    public static final Logger LOGGER = LogManager.getLogger();
 
-	@NetworkCheckHandler
-	public boolean netCheckHandler(Map<String, String> mods, Side side) {
-		return true;
-	}
+    public EMCGadgets() {
+        ModConfig.register();
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        MinecraftForge.EVENT_BUS.register(this);
+    }
 
-	@Mod.EventHandler
-	public void init(FMLInitializationEvent event) {
-		ModConfig.loadKeyItems();
-	}
-
+    private void setup(final FMLCommonSetupEvent event) {
+        LOGGER.info("EMCGadgets initializing...");
+        ModConfig.loadKeyItems();
+    }
 }

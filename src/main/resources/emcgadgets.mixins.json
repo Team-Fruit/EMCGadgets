@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.teamfruit.emcgadgets.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "emcgadgets.refmap.json",
+  "mixins": [
+    "PlayerItemIndexMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
