@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
         maven {
             name = "forge"
             url = "https://files.minecraftforge.net/maven"
@@ -14,8 +14,6 @@ buildscript {
 // Plugins
 plugins {
     id 'com.palantir.git-version' version '0.7.1'
-    id 'co.riiid.gradle' version '0.4.2'
-    id 'com.jfrog.bintray' version '1.8.4'
     id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
@@ -195,8 +193,6 @@ ext {
     sec_curseforge_key = System.getenv('CURSEFORGE_TOKEN') ?: project.isProperty('api_key_curseforge') ? project.api_key_curseforge : null
     sec_github_user = System.getenv('GITHUB_ACTOR') ?: project.isProperty('api_user_github') ? project.api_user_github : null
     sec_github_key = System.getenv('GH_TOKEN') ?: project.isProperty('api_key_github') ? project.api_key_github : null
-    sec_bintray_user = System.getenv('BINTRAY_USER') ?: project.isProperty('api_user_bintray') ? project.api_user_bintray : null
-    sec_bintray_key = System.getenv('BINTRAY_KEY') ?: project.isProperty('api_key_bintray') ? project.api_key_github : null
 }
 
 // Configure Source Sets
@@ -394,26 +390,6 @@ artifacts {
     archives sourceJar
 }
 
-// Release GitHub
-if (sec_github_key!=null&&project.isProperty('extra_github_owner')&&project.isProperty('extra_github_repo')) {
-    //tasks.githubRelease.enabled = !mod_autorelease
-    github {
-        tasks.githubRelease.dependsOn 'build'
-        prerelease = mod_prerelease
-        owner = project.extra_github_owner
-        repo = project.extra_github_repo
-        token = sec_github_key
-        tagName = mod_travis ? (mod_autorelease ? "${mod_build_prefix}${mod_buildnumber}" : mod_buildtag) : mod_version_full
-        targetCommitish = mod_git_head
-        name = mod_changelog_title
-        body = mod_changelog
-        draft = false
-        def allassets = [jar, devJar, sourceJar]
-        assets = allassets*.outputs*.files*.asPath*.tr('\\','/')
-    }
-} else
-    tasks.githubRelease.enabled = false
-
 // Maven Publishing
 publishing {
     publications {
@@ -448,31 +424,6 @@ publishing {
         }
     }
 }
-
-// Release Bintray
-if (sec_bintray_user!=null&&sec_bintray_key!=null&&project.isProperty('extra_bintray_repo')&&project.isProperty('extra_bintray_name')) {
-    bintray {
-        tasks.bintrayUpload.enabled = !mod_autorelease
-        user = sec_bintray_user
-        key = sec_bintray_key
-        def pubs = ['ModPublication']
-        publications = pubs
-
-        publish = true
-        pkg {
-            userOrg = project.extra_bintray_org
-            repo = project.extra_bintray_repo
-            name = project.extra_bintray_name
-            version {
-                name = "${mod_version}"
-                released = new Date()
-                desc = "${mod_changelog_title}"+(StringUtils.isEmpty(mod_changelog)?'':"\n\n${mod_changelog}")
-                vcsTag = mod_buildtag
-            }
-        }
-    }
-} else
-    tasks.bintrayUpload.enabled = false
 
 // Release CurseForge
 if (sec_curseforge_key!=null&&project.isProperty('extra_curseforge_id')) {
