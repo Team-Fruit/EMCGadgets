@@ -81,6 +81,10 @@ dependencies {
     runtimeOnly fg.deobf('curse.maven:jei-238222:4371666')
 }
 
+java {
+    withSourcesJar()
+}
+
 jar {
     manifest {
         attributes([
@@ -97,6 +101,13 @@ jar {
 }
 
 jar.finalizedBy('reobfJar')
+
+task devJar(type: Jar) {
+    from sourceSets.main.output
+    archiveClassifier = 'dev'
+}
+
+build.dependsOn devJar
 
 publishing {
     publications {
