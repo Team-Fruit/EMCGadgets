@@ -8,7 +8,7 @@ plugins {
 
 version = "${mc_version}-${mod_version}"
 group = 'net.teamfruit'
-archivesBaseName = 'emcgadgets'
+archivesBaseName = 'EMCGadgets'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
